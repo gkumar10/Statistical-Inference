@@ -1,8 +1,3 @@
----
-output:
-  html_document:
-    keep_md: yes
----
 Statistical Inference
 =====================
 **Objective - Simulation exercise**
@@ -11,8 +6,8 @@ The exponential distribution can be simulated in R with rexp(n, lambda) where la
 
 Illustrate via simulation and associated explanatory text the properties of the distribution of the mean of 40 exponential(0.2)s.
 
-```{r echo=TRUE}
 
+```r
 set.seed(40)
 lambda <- 0.2
 samplesize <- 40 #40 is sample size
@@ -27,16 +22,17 @@ row_meanvalue <- rowMeans(simulated_matrix)
 
 **1. Show where the distribution is centered at and compare it to the theoretical center of the distribution.**
 
-The theoretical mean/center of the distribution is: `r 1/lambda`
+The theoretical mean/center of the distribution is: 5
 
 The simulated mean/center of the distribution is:
-`r round(mean(row_meanvalue),3)`
+4.989
 
 Therefore, the simulated mean is very close to the theoretical mean.
 
 Following histogram shows the distribution of mean based on simulations.
 
-```{r echo=TRUE}
+
+```r
 hist(row_meanvalue,
      col="green",
      breaks=20,
@@ -48,18 +44,19 @@ lines(density(row_meanvalue), col="blue", lwd=2)
 abline(v=1/lambda, col="red", lwd=2)
 
 legend('topright', c("theoretical mean"), lty=1, col=c("red"))
-
 ```
+
+![](./simulation_exercise_files/figure-html/unnamed-chunk-2-1.png) 
 
 **2. Show how variable it is and compare it to the theoretical variance of the distribution.**
 
 * Standard deviation:
-    + Theoretical value: `r round((1/lambda)/sqrt(samplesize),3)`
-    + Simulated value: `r round(sd(row_meanvalue),3)`
+    + Theoretical value: 0.791
+    + Simulated value: 0.802
 
 * Variance:
-    + Theoretical value: `r round(((1/lambda)/sqrt(samplesize))^2,3)`
-    + Simulated value: `r round(var(row_meanvalue),3)`
+    + Theoretical value: 0.625
+    + Simulated value: 0.643
 
 Therefore, as you can see, the standard deviation and variance of simulations is very close to theoretical values.
 
@@ -69,10 +66,13 @@ Let's use QQPlot to see whether data is normally distributed. Most data fall on 
 
 As another proof point, the blue line in the 'Distribution of mean' histogram in #1 above also indicates the distribution is approximately normal.
 
-```{r echo=TRUE}
+
+```r
 qqnorm(row_meanvalue, col="magenta")
 qqline(row_meanvalue, col="black")
 ```
+
+![](./simulation_exercise_files/figure-html/unnamed-chunk-3-1.png) 
 
 End of document
 ===============
