@@ -41,9 +41,9 @@ hist(row_meanvalue,
      prob=TRUE)
 
 lines(density(row_meanvalue), col="blue", lwd=2)
-abline(v=1/lambda, col="red", lwd=2)
+abline(v=mean(row_meanvalue), col="red", lwd=2)
 
-legend('topright', c("theoretical mean"), lty=1, col=c("red"))
+legend('topright', c("simulation mean"), lty=1, col=c("red"))
 ```
 
 ![](./simulation_exercise_files/figure-html/unnamed-chunk-2-1.png) 
@@ -64,7 +64,7 @@ Therefore, as you can see, the standard deviation and variance of simulations is
 
 Let's use QQPlot to see whether data is normally distributed. Most data fall on the line on the QQ plot, but then both ends tail off a bit. The data isn't perfectly normal, but the QQ Plot shows that normality is a pretty good approximation. 
 
-As another proof point, the blue line in the 'Distribution of mean' histogram in #1 above also indicates the distribution is approximately normal.
+As another proof point: according to the Central Limit Theorem, the averages of samples follow normal distribution. In the 'Distribution of mean' histogram in #1 above, the shape of blue line also indicates the distribution is approximately normal.
 
 
 ```r
