@@ -14,6 +14,7 @@ Did the student describe the assumptions needed for their conclusions?
 **Load the ToothGrowth data and perform some basic exploratory data analyses**
 ```{r echo=TRUE}
 data(ToothGrowth)
+ToothGrowth
 ```
 ToothGrowth is a dataset of type `r class(ToothGrowth)` with:
 

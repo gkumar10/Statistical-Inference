@@ -56,7 +56,69 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <h1>ToothGrowth data analysis</h1>
 <p>Now in the second portion of the class, we’re going to analyze the ToothGrowth data in the R datasets package. Load the ToothGrowth data and perform some basic exploratory data analyses Provide a basic summary of the data. Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose. (Only use the techniques from class, even if there’s other approaches worth considering) State your conclusions and the assumptions needed for your conclusions. Some criteria that you will be evaluated on Did you perform an exploratory data analysis of at least a single plot or table highlighting basic features of the data? Did the student perform some relevant confidence intervals and/or tests? Were the results of the tests and/or intervals interpreted in the context of the problem correctly? Did the student describe the assumptions needed for their conclusions?</p>
 <p><strong>Load the ToothGrowth data and perform some basic exploratory data analyses</strong></p>
-<pre class="r"><code>data(ToothGrowth)</code></pre>
+<pre class="r"><code>data(ToothGrowth)
+ToothGrowth</code></pre>
+<pre><code>##     len supp dose
+## 1   4.2   VC  0.5
+## 2  11.5   VC  0.5
+## 3   7.3   VC  0.5
+## 4   5.8   VC  0.5
+## 5   6.4   VC  0.5
+## 6  10.0   VC  0.5
+## 7  11.2   VC  0.5
+## 8  11.2   VC  0.5
+## 9   5.2   VC  0.5
+## 10  7.0   VC  0.5
+## 11 16.5   VC  1.0
+## 12 16.5   VC  1.0
+## 13 15.2   VC  1.0
+## 14 17.3   VC  1.0
+## 15 22.5   VC  1.0
+## 16 17.3   VC  1.0
+## 17 13.6   VC  1.0
+## 18 14.5   VC  1.0
+## 19 18.8   VC  1.0
+## 20 15.5   VC  1.0
+## 21 23.6   VC  2.0
+## 22 18.5   VC  2.0
+## 23 33.9   VC  2.0
+## 24 25.5   VC  2.0
+## 25 26.4   VC  2.0
+## 26 32.5   VC  2.0
+## 27 26.7   VC  2.0
+## 28 21.5   VC  2.0
+## 29 23.3   VC  2.0
+## 30 29.5   VC  2.0
+## 31 15.2   OJ  0.5
+## 32 21.5   OJ  0.5
+## 33 17.6   OJ  0.5
+## 34  9.7   OJ  0.5
+## 35 14.5   OJ  0.5
+## 36 10.0   OJ  0.5
+## 37  8.2   OJ  0.5
+## 38  9.4   OJ  0.5
+## 39 16.5   OJ  0.5
+## 40  9.7   OJ  0.5
+## 41 19.7   OJ  1.0
+## 42 23.3   OJ  1.0
+## 43 23.6   OJ  1.0
+## 44 26.4   OJ  1.0
+## 45 20.0   OJ  1.0
+## 46 25.2   OJ  1.0
+## 47 25.8   OJ  1.0
+## 48 21.2   OJ  1.0
+## 49 14.5   OJ  1.0
+## 50 27.3   OJ  1.0
+## 51 25.5   OJ  2.0
+## 52 26.4   OJ  2.0
+## 53 22.4   OJ  2.0
+## 54 24.5   OJ  2.0
+## 55 24.8   OJ  2.0
+## 56 30.9   OJ  2.0
+## 57 26.4   OJ  2.0
+## 58 27.3   OJ  2.0
+## 59 29.4   OJ  2.0
+## 60 23.0   OJ  2.0</code></pre>
 <p>ToothGrowth is a dataset of type data.frame with:</p>
 <p>number of rows: 60</p>
 <p>number of columns: 3</p>
