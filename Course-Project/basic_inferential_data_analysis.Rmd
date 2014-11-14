@@ -11,11 +11,39 @@ Did the student perform some relevant confidence intervals and/or tests?
 Were the results of the tests and/or intervals interpreted in the context of the problem correctly? 
 Did the student describe the assumptions needed for their conclusions?
 
-**Load the ToothGrowth data and perform some basic exploratory data analyses**
+**Load the ToothGrowth data and perform some basic exploratory data analysis**
 ```{r echo=TRUE}
+library(ggplot2)
+lenBYdose <- NULL
 data(ToothGrowth)
-ToothGrowth
+lenBYdose <- aggregate(ToothGrowth$len, by=list(ToothGrowth$dose), FUN=mean)
+names(lenBYdose) <- c("len", "dose")
+
+ggplot(lenBYdose, aes(dose, len, label=dose)) + 
+  geom_line() +
+  ylab("Average tooth length") +
+  xlab("Dose in milligrams") +
+  ggtitle("Average Tooth Length by Dose") +
+  geom_text()
+
 ```
+
+The above data plot shows that average tooth length has a linear relationship with dose amount. 
+
+
+```{r echo=TRUE}
+#lenBYsupp <- aggregate(ToothGrowth$len, by=list(ToothGrowth$supp), FUN=mean)
+#names(lenBYsupp) <- c("len", "supp")
+
+#ggplot(lenBYsupp, aes(len, supp, label=len)) + 
+ # geom_line() +
+  #ylab("Supplement") +
+  #xlab("Average tooth length") +
+  #geom_text()
+
+
+```
+
 ToothGrowth is a dataset of type `r class(ToothGrowth)` with:
 
 number of rows: `r nrow(ToothGrowth)`
