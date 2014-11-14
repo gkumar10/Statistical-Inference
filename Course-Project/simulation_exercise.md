@@ -34,14 +34,14 @@ Following histogram shows the distribution of mean based on simulations.
 
 ```r
 hist(row_meanvalue,
-     col="green",
+     col="yellow",
      breaks=20,
      main="Distribution of mean value",
      xlab="Mean Value",
      prob=TRUE)
 
-lines(density(row_meanvalue), col="blue", lwd=2)
-abline(v=mean(row_meanvalue), col="red", lwd=2)
+lines(density(row_meanvalue), col="blue", lwd=3)
+abline(v=mean(row_meanvalue), col="red", lwd=3)
 
 legend('topright', c("simulation mean"), lty=1, col=c("red"))
 ```
@@ -62,17 +62,44 @@ Therefore, as you can see, the standard deviation and variance of simulations is
 
 **3. Show that the distribution is approximately normal.**
 
-Let's use QQPlot to see whether data is normally distributed. Most data fall on the line on the QQ plot, but then both ends tail off a bit. The data isn't perfectly normal, but the QQ Plot shows that normality is a pretty good approximation. 
+We will use 2 different methods to show the distribution is approximately normal.
 
-As another proof point: according to the Central Limit Theorem, the averages of samples follow normal distribution. In the 'Distribution of mean' histogram in #1 above, the shape of blue line also indicates the distribution is approximately normal.
-
+Method #1: According to the Central Limit Theorem, the averages of samples follow normal distribution. We will visually compare shapes of distribution of a large collection of random exponentials with distribution of averages of 40 exponential (0.2)s. For the sake of consistency, we will use the same lambda value of 0.2 in both distributions. The first graph, on left, shows a skewed distribution. The second graph, on right, shows a normal curve.
 
 ```r
-qqnorm(row_meanvalue, col="magenta")
-qqline(row_meanvalue, col="black")
+par(mfrow=c(1,2))
+hist(simulated_matrix,
+     col="grey",
+     breaks=20,
+     main="Skewed distribution",
+     xlab="Value",
+     prob=TRUE)
+lines(density(simulated_matrix), col="blue", lwd=5)
+
+hist(row_meanvalue,
+     col="grey",
+     breaks=20,
+     main="Approx. normal distribution",
+     xlab="Value",
+     prob=TRUE)
+lines(density(row_meanvalue), col="blue", lwd=5)
 ```
 
 ![](./simulation_exercise_files/figure-html/unnamed-chunk-3-1.png) 
+
+Method #2: Use QQPlot to see whether data is normally distributed. Most data fall on the line on the QQ plot, but then both ends tail off a bit. The data isn't perfectly normal, but the QQ Plot shows that normality is a pretty good approximation. 
+
+
+
+
+```r
+qqnorm(row_meanvalue, 
+       col="magenta",
+       main="QQ Plot")
+qqline(row_meanvalue, col="black")
+```
+
+![](./simulation_exercise_files/figure-html/unnamed-chunk-4-1.png) 
 
 End of document
 ===============
