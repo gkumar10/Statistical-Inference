@@ -19,7 +19,7 @@ data(ToothGrowth)
 lenBYdose <- aggregate(ToothGrowth$len, by=list(ToothGrowth$dose), FUN=mean)
 names(lenBYdose) <- c("len", "dose")
 
-ggplot(lenBYdose, aes(dose, len, label=dose)) + 
+ggplot(lenBYdose, aes(dose, len, label=round(dose,1))) + 
   geom_line() +
   ylab("Average tooth length") +
   xlab("Dose in milligrams") +
@@ -28,22 +28,12 @@ ggplot(lenBYdose, aes(dose, len, label=dose)) +
 
 ```
 
-The above data plot shows that average tooth length has a linear relationship with dose amount. 
+The above data plot shows that average tooth length has a linear relationship with amount of dose. 
 
-
+**Basic summary**
 ```{r echo=TRUE}
-#lenBYsupp <- aggregate(ToothGrowth$len, by=list(ToothGrowth$supp), FUN=mean)
-#names(lenBYsupp) <- c("len", "supp")
-
-#ggplot(lenBYsupp, aes(len, supp, label=len)) + 
- # geom_line() +
-  #ylab("Supplement") +
-  #xlab("Average tooth length") +
-  #geom_text()
-
-
+summary(ToothGrowth)
 ```
-
 ToothGrowth is a dataset of type `r class(ToothGrowth)` with:
 
 number of rows: `r nrow(ToothGrowth)`
@@ -52,11 +42,9 @@ number of columns: `r ncol(ToothGrowth)`
 
 column names: `r names(ToothGrowth)`
 
-**Basic summary**
-```{r echo=TRUE}
-summary(ToothGrowth)
-```
 
 **Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose**
 
-**State your conclusions and the assumptions needed for your conclusions**
+**State your conclusions**
+
+**State the assumptions needed for your conclusions**
