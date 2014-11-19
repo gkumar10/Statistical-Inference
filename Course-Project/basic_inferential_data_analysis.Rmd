@@ -12,6 +12,8 @@ Were the results of the tests and/or intervals interpreted in the context of the
 Did the student describe the assumptions needed for their conclusions?
 
 **Load the ToothGrowth data and perform some basic exploratory data analysis**
+
+The below data plot shows that average tooth length has a linear relationship with amount of dose. Higher the dose, longer the tooth.
 ```{r echo=TRUE}
 library(ggplot2)
 lenBYdose <- NULL
@@ -28,7 +30,21 @@ ggplot(lenBYdose, aes(dose, len, label=round(dose,1))) +
 
 ```
 
-The above data plot shows that average tooth length has a linear relationship with amount of dose. 
+The following plot is a different view of the positive relationship between tooth length and the dose levels of
+Vitamin C for both delivery methods. The difference in tooth length is significant when dose amount is 0.5mm or 1mm. At 2mm, the difference becomes less visible.
+
+```{r echo=TRUE}
+
+ggplot(ToothGrowth, aes(as.factor(dose), len, fill=supp, label=round(len,1))) +
+  geom_bar(stat="identity") + 
+  facet_grid(. ~ supp) +
+  xlab("Dose in milligrams") +
+  ylab("Tooth length") +
+  guides(fill=guide_legend(title="Supplement type"))
+
+```
+
+
 
 **Basic summary**
 ```{r echo=TRUE}
@@ -36,15 +52,28 @@ summary(ToothGrowth)
 ```
 ToothGrowth is a dataset of type `r class(ToothGrowth)` with:
 
-number of rows: `r nrow(ToothGrowth)`
+number of observations: `r nrow(ToothGrowth)`
 
 number of columns: `r ncol(ToothGrowth)`
 
 column names: `r names(ToothGrowth)`
 
 
-**Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose**
+**Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose. State your conclusions**
 
-**State your conclusions**
+Let's use T-Tests to compare tooth growth by supplement type and dosage amount.
+
+*First, we will compare tooth growth by supplement type*
+```{r echo=TRUE}
+t.test(len ~ supp, data=ToothGrowth)
+```
+
+*Next, we will compare tooth growth by dosage amount*
+```{r echo=TRUE}
+t.test(len ~ dose, data=subset(ToothGrowth, dose==c(0.5, 1.0)))
+```
+
 
 **State the assumptions needed for your conclusions**
+1. Samples are random, independent, and come from normally distributed population with unknown but equal variances. 
+2. Populations follow a Gaussian distribution.
