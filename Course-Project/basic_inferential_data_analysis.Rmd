@@ -1,15 +1,5 @@
 ToothGrowth data analysis
 =========================
-Now in the second portion of the class, we're going to analyze the ToothGrowth data in the R datasets package. 
-Load the ToothGrowth data and perform some basic exploratory data analyses 
-Provide a basic summary of the data.
-Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose. (Only use the techniques from class, even if there's other approaches worth considering)
-State your conclusions and the assumptions needed for your conclusions. 
-Some criteria that you will be evaluated on
-Did you  perform an exploratory data analysis of at least a single plot or table highlighting basic features of the data?
-Did the student perform some relevant confidence intervals and/or tests?
-Were the results of the tests and/or intervals interpreted in the context of the problem correctly? 
-Did the student describe the assumptions needed for their conclusions?
 
 **Load the ToothGrowth data and perform some basic exploratory data analysis**
 
@@ -31,10 +21,9 @@ ggplot(lenBYdose, aes(dose, len, label=round(dose,1))) +
 ```
 
 The following plot is a different view of the positive relationship between tooth length and the dose levels of
-Vitamin C for both delivery methods. The difference in tooth length is significant when dose amount is 0.5mm or 1mm. At 2mm, the difference becomes less visible.
+Vitamin C for both delivery methods. The difference in tooth length is significant when dose amount is 0.5mm or 1mm. At 2mm, the difference becomes less significant.
 
 ```{r echo=TRUE}
-
 ggplot(ToothGrowth, aes(as.factor(dose), len, fill=supp, label=round(len,1))) +
   geom_bar(stat="identity") + 
   facet_grid(. ~ supp) +
@@ -44,11 +33,10 @@ ggplot(ToothGrowth, aes(as.factor(dose), len, fill=supp, label=round(len,1))) +
 
 ```
 
-
-
 **Basic summary**
 ```{r echo=TRUE}
 summary(ToothGrowth)
+
 ```
 ToothGrowth is a dataset of type `r class(ToothGrowth)` with:
 
@@ -58,22 +46,49 @@ number of columns: `r ncol(ToothGrowth)`
 
 column names: `r names(ToothGrowth)`
 
-
 **Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose. State your conclusions**
 
-Let's use T-Tests to compare tooth growth by supplement type and dosage amount.
+We will us use T-Tests to compare tooth growth by supplement type and dosage amount.
 
 *First, we will compare tooth growth by supplement type*
 ```{r echo=TRUE}
 t.test(len ~ supp, data=ToothGrowth)
-```
 
-*Next, we will compare tooth growth by dosage amount*
-```{r echo=TRUE}
-t.test(len ~ dose, data=subset(ToothGrowth, dose==c(0.5, 1.0)))
 ```
+The p-value of `r round(as.numeric(t.test(len ~ supp, data=ToothGrowth)[3]), 2)` indicates that if we were to repeat our experiment many, many times (each time we select `r nrow(ToothGrowth)/2` observations for each of supplement type at random and compute the sample mean) then `r round(as.numeric(t.test(len ~ supp, data=ToothGrowth)[3]), 2)*100` times out of 100 we can expect to see a sample mean greater than mean of the group for each supplement type.
+
+The 95% confidence interval shows that there is a 95% chance that the confidence interval `r t.test(len ~ supp, data=ToothGrowth)[[4]][1:2]` contains the true population mean. If repeated samples were taken and the 95% confidence interval computed for each sample, 95% of the intervals would contain the population mean.
+
+
+*Next, we will compare tooth growth by dosage amount by subsetting data in 3 pairs of doses.*
+```{r echo=TRUE}
+t.test(len ~ dose, data=subset(ToothGrowth, dose %in% c(0.5, 1.0)))
+```
+The p-value of `r t.test(len ~ dose, data=subset(ToothGrowth, dose %in% c(0.5, 1.0)))[3]` indicates that if we were to repeat our experiment many, many times (each time we select `r nrow(ToothGrowth)/2` observations for each of supplement type at random and compute the sample mean) then `r round(as.numeric(t.test(len ~ dose, data=subset(ToothGrowth, dose %in% c(0.5, 1.0)))[3]), 4)*100` times out of 100 we can expect to see a sample mean greater than mean of the group for each supplement type.
+
+The 95% confidence interval shows that there is a 95% chance that the confidence interval `r t.test(len ~ dose, data=subset(ToothGrowth, dose %in% c(0.5, 1.0)))[[4]][1:2]` contains the true population mean. If repeated samples were taken and the 95% confidence interval computed for each sample, 95% of the intervals would contain the population mean.
+
+
+
+```{r echo=TRUE}
+t.test(len ~ dose, data=subset(ToothGrowth, dose %in% c(1.0, 2.0)))
+```
+The p-value of `r t.test(len ~ dose, data=subset(ToothGrowth, dose %in% c(1.0, 2.0)))[3]` indicates that if we were to repeat our experiment many, many times (each time we select `r nrow(ToothGrowth)/2` observations for each of supplement type at random and compute the sample mean) then `r round(as.numeric(t.test(len ~ dose, data=subset(ToothGrowth, dose %in% c(1.0, 2.0)))[3]), 4)*100` times out of 100 we can expect to see a sample mean greater than mean of the group for each supplement type.
+
+The 95% confidence interval shows that there is a 95% chance that the confidence interval `r t.test(len ~ dose, data=subset(ToothGrowth, dose %in% c(1.0, 2.0)))[[4]][1:2]` contains the true population mean. If repeated samples were taken and the 95% confidence interval computed for each sample, 95% of the intervals would contain the population mean.
+
+```{r echo=TRUE}
+t.test(len ~ dose, data=subset(ToothGrowth, dose==c(0.5, 2.0)))
+```
+The p-value of `r t.test(len ~ dose, data=subset(ToothGrowth, dose %in% c(0.5, 2.0)))[3]` indicates that if we were to repeat our experiment many, many times (each time we select `r nrow(ToothGrowth)/2` observations for each of supplement type at random and compute the sample mean) then `r round(as.numeric(t.test(len ~ dose, data=subset(ToothGrowth, dose %in% c(0.5, 2.0)))[3]), 4)*100` times out of 100 we can expect to see a sample mean greater than mean of the group for each supplement type.
+
+The 95% confidence interval shows that there is a 95% chance that the confidence interval `r t.test(len ~ dose, data=subset(ToothGrowth, dose %in% c(0.5, 2.0)))[[4]][1:2]` contains the true population mean. If repeated samples were taken and the 95% confidence interval computed for each sample, 95% of the intervals would contain the population mean.
 
 
 **State the assumptions needed for your conclusions**
+
 1. Samples are random, independent, and come from normally distributed population with unknown but equal variances. 
 2. Populations follow a Gaussian distribution.
+
+end of document
+===============
