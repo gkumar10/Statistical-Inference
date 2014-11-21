@@ -101,5 +101,5 @@ qqline(row_meanvalue, col="black")
 
 ![](./simulation_exercise_files/figure-html/unnamed-chunk-4-1.png) 
 
-End of document
+end of document
 ===============

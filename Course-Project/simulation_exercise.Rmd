@@ -100,5 +100,5 @@ qqnorm(row_meanvalue,
 qqline(row_meanvalue, col="black")
 ```
 
-End of document
+end of document
 ===============
